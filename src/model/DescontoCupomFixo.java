@@ -1,10 +1,10 @@
 package model;
 
-public class descontocupomfisico implements Calculodesconto {
+public class DescontoCupomFixo implements CalculoDesconto {
 
     private double valorDesconto;
 
-    public descontocupomfisico(double valorDesconto) {
+    public DescontoCupomFixo(double valorDesconto) {
         this.valorDesconto = valorDesconto;
     }
 

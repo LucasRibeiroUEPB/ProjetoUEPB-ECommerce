@@ -11,9 +11,9 @@ public class JogoDigital extends ItemEstoque {
 
 		super(codigo, nome, precoBase, quantidadeEstoque, categoria);
 
-		Validador.verificarZero(tamanhoDownload, "tamanho do download esta menor ou igual a zero");
+		Validador.verificarZero(tamanhoDownload, "Tamanho do download esta menor ou igual a zero");
 
-		Validador.verificarVazio(chaveAtivacao, "chave de ativacao esta invalida");
+		Validador.verificarVazio(chaveAtivacao, "Chave de ativacao invalida");
 
 		this.tamanhoDownload = tamanhoDownload;
 		this.chaveAtivacao = chaveAtivacao;

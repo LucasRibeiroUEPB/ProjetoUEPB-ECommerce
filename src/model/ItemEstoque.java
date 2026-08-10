@@ -11,17 +11,17 @@ public abstract class ItemEstoque {
 
 	public ItemEstoque(String codigo, String nome, double precoBase, int quantidadeEstoque, CategoriaItem categoria)
 			throws Exception {
-		
-		Validador.verificarVazio(codigo, "codigo esta invalido");
 
-		Validador.verificarVazio(nome, "nome esta invalido");
+		Validador.verificarVazio(codigo, "Codigo invalido");
 
-		Validador.verificarNegativo(precoBase, "preco esta negativo");
+		Validador.verificarVazio(nome, "Nome invalido");
 
-		Validador.verificarNegativo(quantidadeEstoque, "estoque esta negativo");
+		Validador.verificarNegativo(precoBase, "Preço inválido");
+
+		Validador.verificarNegativo(quantidadeEstoque, "Quantidade inválida");
 
 		if (categoria == null) {
-			throw new Exception("categoria esta invalida");
+			throw new Exception("Categoria invalida");
 		}
 
 		this.codigo = codigo;

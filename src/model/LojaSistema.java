@@ -1,0 +1,133 @@
+package model;
+
+import java.util.HashMap;
+import java.util.Map;
+
+public class LojaSistema {
+	private Map<String, ItemEstoque> inventario;
+	private Map<String, Cliente> clientes;
+
+	public LojaSistema() {
+		this.inventario = new HashMap<>();
+		this.clientes = new HashMap<>();
+	}
+
+	public String adicionarJogoDigital(String codigo, String nome, double precoBase, int quantidadeEstoque,
+			CategoriaItem categoria, double tamanhoDownload, String chaveAtivacao) {
+
+		try {
+			JogoDigital jogo = new JogoDigital(codigo, nome, precoBase, quantidadeEstoque, categoria, tamanhoDownload,
+					chaveAtivacao);
+
+			registrarItem(jogo);
+
+			return "Jogo digital \"" + nome + "\" adicionado com sucesso.";
+		} catch (Exception e) {
+			return e.getMessage();
+		}
+	}
+
+	public String adicionarColecionavelFisico(String codigo, String nome, double precoBase, int quantidadeEstoque,
+			CategoriaItem categoria, double peso, String dimensoes, String estadoConservacao) {
+
+		try {
+			ColecionavelFisico colecionavel = new ColecionavelFisico(codigo, nome, precoBase, quantidadeEstoque,
+					categoria, peso, dimensoes, estadoConservacao);
+
+			registrarItem(colecionavel);
+
+			return "Colecionável físico \"" + nome + "\" adicionado com sucesso.";
+		} catch (Exception e) {
+			return e.getMessage();
+		}
+	}
+
+	private void registrarItem(ItemEstoque item) throws Exception {
+		if (inventario.containsKey(item.getCodigo())) {
+			throw new Exception("Já existe um item cadastrado com o código: " + item.getCodigo());
+		}
+		inventario.put(item.getCodigo(), item);
+	}
+
+	public void cadastrarCliente(Cliente cliente) {
+		clientes.put(cliente.getCpf(), cliente);
+	}
+
+	public ItemEstoque buscarItem(String codigo) throws Exception {
+		ItemEstoque item = inventario.get(codigo);
+
+		if (item == null) {
+			throw new Exception("Item não encontrado: o código " + codigo + " não existe no inventário.");
+		}
+		return item;
+	}
+
+	public Cliente buscarCliente(String cpf) throws Exception {
+		Cliente cliente = clientes.get(cpf);
+
+		if (cliente == null) {
+			throw new Exception("Cliente com CPF " + cpf + " não cadastrado no sistema.");
+		}
+		return cliente;
+	}
+
+	public String adicionarAoCarrinho(String cpf, String codigoItem, int quantidade) {
+		try {
+			Cliente cliente = buscarCliente(cpf);
+			ItemEstoque item = buscarItem(codigoItem);
+
+			cliente.getCarrinho().adicionarItem(item, quantidade);
+
+			return "Item \"" + item.getNome() + "\" adicionado ao carrinho com sucesso.";
+		} catch (Exception e) {
+			return e.getMessage();
+		}
+	}
+
+	public String finalizarCompra(String cpf, String cupom) {
+		try {
+			Cliente cliente = buscarCliente(cpf);
+			CarrinhoDeCompras carrinho = cliente.getCarrinho();
+
+			carrinho.setEstrategiaDesconto(obterEstrategiaDesconto(cupom));
+
+			double valorFinal = carrinho.calcularTotal();
+
+			processarVenda(carrinho);
+
+			return String.format(java.util.Locale.US, "Compra finalizada com sucesso! Total: R$ %.2f", valorFinal);
+		} catch (Exception e) {
+			return e.getMessage();
+		}
+	}
+
+	private CalculoDesconto obterEstrategiaDesconto(String cupom) throws Exception {
+		if (cupom == null) {
+			return null;
+		}
+
+		if (cupom.equals("FIX020")) {
+			return new DescontoCupomFixo(20.0);
+		}
+
+		if (cupom.equals("PROMO10")) {
+			return new DescontoPorcentagem(10.0);
+		}
+
+		throw new Exception("Cupom inválido: " + cupom);
+	}
+
+	public void processarVenda(CarrinhoDeCompras carrinho) throws Exception {
+		Map<ItemEstoque, Integer> quantidades = carrinho.getQuantidades();
+
+		for (Map.Entry<ItemEstoque, Integer> entry : quantidades.entrySet()) {
+
+			ItemEstoque item = entry.getKey();
+			int quantidadeSolicitada = entry.getValue();
+
+			item.reduzirEstoque(quantidadeSolicitada);
+		}
+
+		carrinho.limparCarrinho();
+	}
+}

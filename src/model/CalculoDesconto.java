@@ -1,5 +1,5 @@
 package model;
 
-public interface Calculodesconto {
+public interface CalculoDesconto {
     double aplicarDesconto(double valorTotal);
 }
