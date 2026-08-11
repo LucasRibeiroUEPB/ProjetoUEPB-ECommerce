@@ -172,7 +172,7 @@ public class LojaSistema {
 			tamanho--;
 
 			if (tamanho > 0) {
-				info += "\n";
+				info += "\n\n";
 			}
 		}
 		return info;
@@ -190,7 +190,7 @@ public class LojaSistema {
 			info += cliente;
 			tamanho--;
 			if (tamanho > 0) {
-				info += "\n";
+				info += "\n\n";
 			}
 		}
 		return info;

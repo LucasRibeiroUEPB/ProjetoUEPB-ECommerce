@@ -1,11 +1,15 @@
 package model;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import exception.Validador;
 
 public class Cliente {
 	private String cpf;
 	private String nome;
 	private CarrinhoDeCompras carrinho;
+	private List<String> historicoDeCompras;
 
 	public Cliente(String cpf, String nome) throws Exception {
 
@@ -14,6 +18,7 @@ public class Cliente {
 		this.cpf = cpf;
 		this.nome = nome;
 		this.carrinho = new CarrinhoDeCompras();
+		historicoDeCompras = new ArrayList<String>();
 	}
 
 	public String getCpf() {

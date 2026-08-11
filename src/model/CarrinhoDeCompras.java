@@ -1,6 +1,5 @@
 package model;
 
-
 import java.util.HashMap;
 import java.util.Map;
 
@@ -55,16 +54,15 @@ public class CarrinhoDeCompras {
 
 	public double calcularTotal() {
 		double subtotal = calcularSubtotal();
-			if(estrategiaDesconto==null) {
+		if (estrategiaDesconto == null) {
 			return subtotal;
 		}
-			return estrategiaDesconto.aplicarDesconto(subtotal);
+		return estrategiaDesconto.aplicarDesconto(subtotal);
 	}
 
 	public void limparCarrinho() {
 		itensNoCarrinho.clear();
 	}
-
 
 	public Map<ItemEstoque, Integer> getItensNoCarrinho() {
 		return itensNoCarrinho;
@@ -80,10 +78,10 @@ public class CarrinhoDeCompras {
 		for (ItemEstoque item : itensNoCarrinho.keySet()) {
 			info += "  " + item.getNome() + " x" + itensNoCarrinho.get(item);
 			tamanho--;
-			if(tamanho>0) {
-				info+="\n";
+			if (tamanho > 0) {
+				info += "\n\n";
 			}
-		
+
 		}
 		return info;
 	}
