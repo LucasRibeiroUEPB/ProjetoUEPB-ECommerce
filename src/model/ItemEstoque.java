@@ -62,4 +62,11 @@ public abstract class ItemEstoque {
 		quantidadeEstoque -= qtd;
 	}
 
+	@Override
+	public String toString() {
+		return "Codigo: " + codigo + "\n" + "Nome: " + nome + "\n" + "Categoria: " + categoria + "\n" + "Preco base: "
+				+ precoBase + "\n" + "Preco final: " + calcularPrecoFinal() + "\n" + "Quantidade em estoque: "
+				+ quantidadeEstoque;
+	}
+
 }

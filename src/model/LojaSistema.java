@@ -95,7 +95,7 @@ public class LojaSistema {
 
 			processarVenda(carrinho);
 
-			return String.format(java.util.Locale.US, "Compra finalizada com sucesso! Total: R$ %.2f", valorFinal);
+			return "Compra finalizada com sucesso! Total: R$ " + valorFinal;
 		} catch (Exception e) {
 			return e.getMessage();
 		}
@@ -129,5 +129,43 @@ public class LojaSistema {
 		}
 
 		carrinho.limparCarrinho();
+	}
+
+	public String listarItens() {
+		if (inventario.isEmpty()) {
+			return "Nenhum item cadastrado.";
+		}
+
+		String info = "";
+		boolean primeiro = true;
+
+		for (ItemEstoque item : inventario.values()) {
+			if (!primeiro) {
+				info += "\n";
+			}
+			info += item;
+			primeiro = false;
+		}
+		return info;
+
+	}
+
+	public String listarClientes() {
+		if (clientes.isEmpty()) {
+			return "Nenhum cliente cadastrado.";
+		}
+
+		String info = "";
+		boolean primeiro = true;
+
+		for (Cliente cliente : clientes.values()) {
+			if (!primeiro) {
+				info += "\n";
+			}
+			info += cliente;
+			primeiro = false;
+		}
+		return info;
+
 	}
 }

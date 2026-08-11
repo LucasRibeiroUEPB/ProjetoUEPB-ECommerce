@@ -178,7 +178,7 @@ public class LojaControllerTest {
 
 		String resultado = controlador.finalizarCompra("11111111111", null);
 
-		assertEquals("Compra finalizada com sucesso! Total: R$ 200.00", resultado);
+		assertEquals("Compra finalizada com sucesso! Total: R$ 200.0", resultado);
 	}
 
 	@Test
@@ -190,7 +190,7 @@ public class LojaControllerTest {
 
 		String resultado = controlador.finalizarCompra("11111111111", "FIX020");
 
-		assertEquals("Compra finalizada com sucesso! Total: R$ 180.00", resultado);
+		assertEquals("Compra finalizada com sucesso! Total: R$ 180.0", resultado);
 	}
 
 	@Test
@@ -202,7 +202,7 @@ public class LojaControllerTest {
 
 		String resultado = controlador.finalizarCompra("11111111111", "PROMO10");
 
-		assertEquals("Compra finalizada com sucesso! Total: R$ 180.00", resultado);
+		assertEquals("Compra finalizada com sucesso! Total: R$ 180.0", resultado);
 	}
 
 	@Test
@@ -241,5 +241,57 @@ public class LojaControllerTest {
 
 		String resultado = controlador.adicionarAoCarrinho("11111111111", "JD01", 2);
 		assertTrue(resultado.contains("sucesso"));
+	}
+
+	@Test
+	public void testListarItensSemCadastros() {
+		LojaController controlador = new LojaController();
+
+		assertEquals("Nenhum item cadastrado.", controlador.listarItens());
+	}
+
+	@Test
+	public void testListarItensComUmCadastro() {
+		LojaController controlador = new LojaController();
+		controlador.adicionarJogoDigital("JD01", "Elden Ring", 250.0, 10, CategoriaItem.JOGO, 45.0, "CHAVE123");
+
+		String esperado = "Codigo: JD01\nNome: Elden Ring\nCategoria: JOGO\nPreco base: 250.0\n"
+				+ "Preco final: 250.0\nQuantidade em estoque: 10\nTamanho do download: 45.0GB\n"
+				+ "Chave de ativacao: CHAVE123";
+
+		assertEquals(esperado, controlador.listarItens());
+	}
+
+	// =========================================================
+	// TESTES DE listarClientes
+	// =========================================================
+
+	@Test
+	public void testListarClientesSemCadastros() {
+		LojaController controlador = new LojaController();
+
+		assertEquals("Nenhum cliente cadastrado.", controlador.listarClientes());
+	}
+
+	@Test
+	public void testListarClientesComCarrinhoVazio() throws Exception {
+		LojaController controlador = new LojaController();
+		controlador.cadastrarCliente(new Cliente("11111111111", "João"));
+
+		String esperado = "CPF: 11111111111\nNome: João\nCarrinho:\n  (vazio)";
+
+		assertEquals(esperado, controlador.listarClientes());
+	}
+
+	@Test
+	public void testListarClientesComItemNoCarrinho() throws Exception {
+		LojaController controlador = new LojaController();
+		controlador.cadastrarCliente(new Cliente("11111111111", "João"));
+		controlador.adicionarJogoDigital("JD01", "Elden Ring", 250.0, 10, CategoriaItem.JOGO, 45.0, "CHAVE123");
+		controlador.adicionarAoCarrinho("11111111111", "JD01", 2);
+
+		String esperado = "CPF: 11111111111\nNome: João\nCarrinho:\n  Elden Ring x2";
+
+		assertEquals(esperado, controlador.listarClientes());
 	}
 }

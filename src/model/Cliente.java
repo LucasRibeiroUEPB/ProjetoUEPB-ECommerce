@@ -27,4 +27,9 @@ public class Cliente {
 	public CarrinhoDeCompras getCarrinho() {
 		return carrinho;
 	}
+
+	@Override
+	public String toString() {
+		return "CPF: " + cpf + "\n" + "Nome: " + nome + "\n" + "Carrinho:\n" + carrinho;
+	}
 }

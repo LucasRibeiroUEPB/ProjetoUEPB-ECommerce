@@ -35,4 +35,12 @@ public class LojaController {
 	public String finalizarCompra(String cpf, String cupom) {
 		return sistema.finalizarCompra(cpf, cupom);
 	}
+
+	public String listarItens() {
+		return sistema.listarItens();
+	}
+
+	public String listarClientes() {
+		return sistema.listarClientes();
+	}
 }

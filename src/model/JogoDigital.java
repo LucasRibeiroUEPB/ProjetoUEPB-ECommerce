@@ -24,4 +24,10 @@ public class JogoDigital extends ItemEstoque {
 		return getPrecoBase();
 	}
 
+	@Override
+	public String toString() {
+		return super.toString() + "\n" + "Tamanho do download: " + tamanhoDownload + "GB\n" + "Chave de ativacao: "
+				+ chaveAtivacao;
+	}
+
 }

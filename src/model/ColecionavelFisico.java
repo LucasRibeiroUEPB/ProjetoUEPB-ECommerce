@@ -45,4 +45,11 @@ public class ColecionavelFisico extends ItemEstoque {
 
 		return 40.00;
 	}
+
+	@Override
+	public String toString() {
+		return super.toString() + "\n" + "Peso: " + peso + "kg\n" + "Dimensoes: " + dimensoes + "\n"
+				+ "Estado de conservacao: " + estadoConservacao;
+	}
+
 }

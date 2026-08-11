@@ -68,4 +68,22 @@ public class CarrinhoDeCompras {
 	public Map<ItemEstoque, Integer> getQuantidades() {
 		return quantidades;
 	}
+
+	@Override
+	public String toString() {
+		if (itens.isEmpty()) {
+			return "  (vazio)";
+		}
+		String info = "";
+		boolean primeiro = true;
+		for (ItemEstoque item : itens) {
+			if (!primeiro) {
+				info += "\n";
+			}
+			info += "  " + item.getNome() + " x" + quantidades.get(item);
+			primeiro = false;
+		}
+		return info;
+	}
+
 }
