@@ -50,4 +50,8 @@ public class LojaController {
 	public String listarClientes() {
 		return sistema.listarClientes();
 	}
+
+	public String listarHistoricoCompras(String cpf) {
+		return sistema.listarHistoricoCompras(cpf);
+	}
 }

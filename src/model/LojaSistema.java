@@ -134,7 +134,11 @@ public class LojaSistema {
 
 			double valorFinal = carrinho.calcularTotal();
 
+			String recibo = "Total: R$ " + valorFinal + "\nItens comprados:\n" + carrinho.toString();
+
 			processarVenda(carrinho);
+
+			cliente.adicionarAoHistorico(recibo);
 
 			return "Compra finalizada com sucesso! Total: R$ " + valorFinal;
 		} catch (Exception e) {
@@ -207,6 +211,28 @@ public class LojaSistema {
 			}
 		}
 		return info;
+	}
 
+	public String listarHistoricoCompras(String cpf) {
+		try {
+			Cliente cliente = buscarCliente(cpf);
+
+			java.util.List<String> historico = cliente.getHistoricoDeCompras();
+
+			if (historico.isEmpty()) {
+				return "Nenhuma compra registrada para o cliente " + cliente.getNome() + ".";
+			}
+
+			String info = "Histórico de Compras - " + cliente.getNome() + ":\n";
+
+			for (int i = 0; i < historico.size(); i++) {
+				info += "\n--- Compra " + (i + 1) + " ---\n";
+				info += historico.get(i) + "\n";
+			}
+
+			return info;
+		} catch (Exception e) {
+			return e.getMessage();
+		}
 	}
 }

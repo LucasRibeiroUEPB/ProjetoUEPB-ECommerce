@@ -45,6 +45,7 @@ public class LojaConsole {
 		System.out.println("6 - Listar clientes");
 		System.out.println("7 - Remover item do carrinho");
 		System.out.println("8 - Adicionar estoque a um item");
+		System.out.println("9 - Listar historico de compras");
 		System.out.println("0 - Sair");
 		System.out.println();
 	}
@@ -83,6 +84,9 @@ public class LojaConsole {
 			adicionarEstoque();
 			break;
 
+		case 9:
+			listarHistoricoCompras();
+			break;
 		case 0:
 			System.out.println("Programa encerrado.");
 			break;
@@ -239,6 +243,14 @@ public class LojaConsole {
 		int quantidade = lerInteiro("Quantidade a adicionar: ");
 
 		String resultado = controlador.adicionarEstoque(codigo, quantidade);
+		System.out.println(resultado);
+	}
+
+	private void listarHistoricoCompras() {
+		System.out.println("\n--- HISTORICO DE COMPRAS ---");
+		String cpf = lerTexto("CPF do cliente: ");
+
+		String resultado = controlador.listarHistoricoCompras(cpf);
 		System.out.println(resultado);
 	}
 }

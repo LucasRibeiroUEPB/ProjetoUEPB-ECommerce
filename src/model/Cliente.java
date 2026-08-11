@@ -21,6 +21,18 @@ public class Cliente {
 		historicoDeCompras = new ArrayList<String>();
 	}
 
+	public List<String> getHistoricoDeCompras() {
+		return historicoDeCompras;
+	}
+
+	public void adicionarAoHistorico(String recibo) {
+		historicoDeCompras.add(recibo);
+	}
+
+	public void setHistoricoDeCompras(List<String> historicoDeCompras) {
+		this.historicoDeCompras = historicoDeCompras;
+	}
+
 	public String getCpf() {
 		return cpf;
 	}
