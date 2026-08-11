@@ -31,6 +31,10 @@ public class LojaController {
 		return sistema.adicionarAoCarrinho(cpf, codigoItem, qtd);
 	}
 
+	public String removerDoCarrinho(String cpf, String codigoItem) {
+		return sistema.removerDoCarrinho(cpf, codigoItem);
+	}
+
 	public String finalizarCompra(String cpf, String cupom) {
 		return sistema.finalizarCompra(cpf, cupom);
 	}

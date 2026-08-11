@@ -95,6 +95,23 @@ public class LojaSistema {
 		}
 	}
 
+	public String removerDoCarrinho(String cpf, String codigoItem) {
+		try {
+			Cliente cliente = buscarCliente(cpf);
+			ItemEstoque item = buscarItem(codigoItem);
+
+			if (!cliente.getCarrinho().getItensNoCarrinho().containsKey(item)) {
+				return "O item \"" + item.getNome() + "\" não está no carrinho.";
+			}
+
+			cliente.getCarrinho().removerItem(item);
+
+			return "Item \"" + item.getNome() + "\" removido do carrinho com sucesso.";
+		} catch (Exception e) {
+			return e.getMessage();
+		}
+	}
+
 	public String finalizarCompra(String cpf, String cupom) {
 		try {
 			Cliente cliente = buscarCliente(cpf);
@@ -149,13 +166,13 @@ public class LojaSistema {
 		}
 
 		String info = "";
-		int tamanho = inventario.size();	
+		int tamanho = inventario.size();
 		for (ItemEstoque item : inventario.values()) {
 			info += item;
 			tamanho--;
-			
-			if(tamanho>0) {
-				info+="\n";
+
+			if (tamanho > 0) {
+				info += "\n";
 			}
 		}
 		return info;
@@ -172,8 +189,8 @@ public class LojaSistema {
 		for (Cliente cliente : clientes.values()) {
 			info += cliente;
 			tamanho--;
-			if(tamanho>0) {
-				info+="\n";
+			if (tamanho > 0) {
+				info += "\n";
 			}
 		}
 		return info;

@@ -25,7 +25,7 @@ public class CarrinhoDeCompras {
 			throw new Exception("Item invalido");
 		}
 
-		Validador.verificarZero(quantidade, "Quantidade deve ser maior que zero");
+		Validador.verificaMenorOuIgualaZero(quantidade, "Quantidade deve ser maior que zero");
 
 		int quantidadeAtualNoCarrinho = 0;
 		if (itensNoCarrinho.containsKey(item)) {

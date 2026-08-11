@@ -13,7 +13,7 @@ public class ColecionavelFisico extends ItemEstoque {
 
 		super(codigo, nome, precoBase, quantidadeEstoque, categoria);
 
-		Validador.verificarZero(peso, "Peso esta menor ou igual a zero");
+		Validador.verificaMenorOuIgualaZero(peso, "Peso esta menor ou igual a zero");
 
 		Validador.verificarVazio(dimensoes, "Dimensoes invalidas");
 

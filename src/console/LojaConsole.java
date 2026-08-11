@@ -43,6 +43,7 @@ public class LojaConsole {
 		System.out.println("4 - Finalizar compra");
 		System.out.println("5 - Listar itens em estoque");
 		System.out.println("6 - Listar clientes");
+		System.out.println("7 - Remover item do carrinho");
 		System.out.println("0 - Sair");
 		System.out.println();
 	}
@@ -73,6 +74,9 @@ public class LojaConsole {
 			listarClientes();
 			break;
 
+		case 7:
+			removerDoCarrinho();
+			break;
 		case 0:
 			System.out.println("Programa encerrado.");
 			break;
@@ -193,6 +197,14 @@ public class LojaConsole {
 		int quantidade = lerInteiro("Quantidade:");
 
 		String resultado = controlador.adicionarAoCarrinho(cpf, codigoItem, quantidade);
+		System.out.println(resultado);
+	}
+
+	private void removerDoCarrinho() {
+		String cpf = lerTexto("CPF do cliente: ");
+		String codigoItem = lerTexto("Codigo do item: ");
+
+		String resultado = controlador.removerDoCarrinho(cpf, codigoItem);
 		System.out.println(resultado);
 	}
 

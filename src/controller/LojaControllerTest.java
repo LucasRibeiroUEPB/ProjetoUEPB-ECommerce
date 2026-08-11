@@ -289,4 +289,48 @@ public class LojaControllerTest {
 
 		assertEquals(esperado, controlador.listarClientes());
 	}
+
+	@Test
+	public void testRemoverDoCarrinhoComSucesso() throws Exception {
+		LojaController controlador = new LojaController();
+		controlador.cadastrarCliente("11111111111", "João");
+		controlador.adicionarJogoDigital("JD01", "Elden Ring", 250.0, 10, CategoriaItem.JOGO, 45.0, "CHAVE123");
+
+		controlador.adicionarAoCarrinho("11111111111", "JD01", 1);
+
+		String resultado = controlador.removerDoCarrinho("11111111111", "JD01");
+
+		assertEquals("Item \"Elden Ring\" removido do carrinho com sucesso.", resultado);
+	}
+
+	@Test
+	public void testRemoverDoCarrinhoItemNaoEstaNoCarrinho() throws Exception {
+		LojaController controlador = new LojaController();
+		controlador.cadastrarCliente("11111111111", "João");
+		controlador.adicionarJogoDigital("JD01", "Elden Ring", 250.0, 10, CategoriaItem.JOGO, 45.0, "CHAVE123");
+
+		String resultado = controlador.removerDoCarrinho("11111111111", "JD01");
+
+		assertEquals("O item \"Elden Ring\" não está no carrinho.", resultado);
+	}
+
+	@Test
+	public void testRemoverDoCarrinhoComClienteInexistente() {
+		LojaController controlador = new LojaController();
+		controlador.adicionarJogoDigital("JD01", "Elden Ring", 250.0, 10, CategoriaItem.JOGO, 45.0, "CHAVE123");
+
+		String resultado = controlador.removerDoCarrinho("99999999999", "JD01");
+
+		assertEquals("Cliente com CPF 99999999999 não cadastrado no sistema.", resultado);
+	}
+
+	@Test
+	public void testRemoverDoCarrinhoComItemInexistente() {
+		LojaController controlador = new LojaController();
+		controlador.cadastrarCliente("11111111111", "João");
+
+		String resultado = controlador.removerDoCarrinho("11111111111", "COD_INEXISTENTE");
+
+		assertEquals("Item não encontrado: o código COD_INEXISTENTE não existe no inventário.", resultado);
+	}
 }

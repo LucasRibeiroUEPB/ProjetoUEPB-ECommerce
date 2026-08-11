@@ -3,7 +3,7 @@ package exception;
 
 public class Validador {
 
-    public static void verificarZero(double valor, String mensagem)
+    public static void verificaMenorOuIgualaZero(double valor, String mensagem)
             throws Exception  {
 
         if (valor <= 0) {
