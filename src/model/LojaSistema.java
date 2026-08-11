@@ -128,7 +128,7 @@ public class LojaSistema {
 		throw new Exception("Cupom inválido: " + cupom);
 	}
 
-	public void processarVenda(CarrinhoDeCompras carrinho) throws Exception {
+	private void processarVenda(CarrinhoDeCompras carrinho) throws Exception {
 		Map<ItemEstoque, Integer> quantidades = carrinho.getItensNoCarrinho();
 
 		for (Map.Entry<ItemEstoque, Integer> entry : quantidades.entrySet()) {

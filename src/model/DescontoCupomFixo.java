@@ -11,6 +11,9 @@ public class DescontoCupomFixo implements CalculoDesconto {
     @Override
     public double aplicarDesconto(double valorTotal) {
         double resultado = valorTotal - valorDesconto;
-        return Math.max(resultado, 0.0);
+        if(resultado < 0) {
+        	return 0;
+        }
+        return resultado;
     }
 }
