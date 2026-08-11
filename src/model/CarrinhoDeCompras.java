@@ -63,9 +63,6 @@ public class CarrinhoDeCompras {
 		itensNoCarrinho.clear();
 	}
 
-	public List<ItemEstoque> getItens() {
-		return new ArrayList<>(itensNoCarrinho.keySet());
-	}
 
 	public Map<ItemEstoque, Integer> getItensNoCarrinho() {
 		return itensNoCarrinho;
