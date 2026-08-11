@@ -28,11 +28,18 @@ public class CarrinhoDeCompras {
 
 		Validador.verificarZero(quantidade, "Quantidade deve ser maior que zero");
 
+		int quantidadeAtualNoCarrinho = 0;
 		if (itensNoCarrinho.containsKey(item)) {
-			itensNoCarrinho.put(item, itensNoCarrinho.get(item) + quantidade);
-		} else {
-			itensNoCarrinho.put(item, quantidade);
+			quantidadeAtualNoCarrinho = itensNoCarrinho.get(item);
 		}
+
+		int quantidadeDesejada = quantidadeAtualNoCarrinho + quantidade;
+		if (quantidadeDesejada > item.getQuantidadeEstoque()) {
+			throw new Exception("Estoque insuficiente. O item " + item.getNome() + " possui apenas "
+					+ item.getQuantidadeEstoque() + " unidades disponiveis.");
+		}
+
+		itensNoCarrinho.put(item, quantidadeDesejada);
 	}
 
 	public void removerItem(ItemEstoque item) {
