@@ -55,7 +55,10 @@ public class CarrinhoDeCompras {
 
 	public double calcularTotal() {
 		double subtotal = calcularSubtotal();
-		return (estrategiaDesconto == null) ? subtotal : estrategiaDesconto.aplicarDesconto(subtotal);
+			if(estrategiaDesconto==null) {
+			return subtotal;
+		}
+			return estrategiaDesconto.aplicarDesconto(subtotal);
 	}
 
 	public void limparCarrinho() {
@@ -73,14 +76,14 @@ public class CarrinhoDeCompras {
 			return "  (vazio)";
 		}
 		String info = "";
-		boolean primeiro = true;
-
+		int tamanho = itensNoCarrinho.size();
 		for (ItemEstoque item : itensNoCarrinho.keySet()) {
-			if (!primeiro) {
-				info += "\n";
-			}
 			info += "  " + item.getNome() + " x" + itensNoCarrinho.get(item);
-			primeiro = false;
+			tamanho--;
+			if(tamanho>0) {
+				info+="\n";
+			}
+		
 		}
 		return info;
 	}
