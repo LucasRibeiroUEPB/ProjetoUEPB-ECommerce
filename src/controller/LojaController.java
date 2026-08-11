@@ -1,7 +1,6 @@
 package controller;
 
 import model.CategoriaItem;
-import model.Cliente;
 import model.LojaSistema;
 
 public class LojaController {
@@ -24,8 +23,8 @@ public class LojaController {
 				dimensoes, estadoConservacao);
 	}
 
-	public void cadastrarCliente(Cliente cliente) {
-		sistema.cadastrarCliente(cliente);
+	public String cadastrarCliente(String cpf, String nome) {
+		return sistema.cadastrarCliente(cpf, nome);
 	}
 
 	public String adicionarAoCarrinho(String cpf, String codigoItem, int qtd) {

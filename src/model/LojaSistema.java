@@ -49,8 +49,19 @@ public class LojaSistema {
 		inventario.put(item.getCodigo(), item);
 	}
 
-	public void cadastrarCliente(Cliente cliente) {
-		clientes.put(cliente.getCpf(), cliente);
+	public String cadastrarCliente(String cpf, String nome) {
+		try {
+			if (clientes.containsKey(cpf)) {
+				return "Já existe um cliente cadastrado com o CPF: " + cpf;
+			}
+
+			Cliente cliente = new Cliente(cpf, nome);
+			clientes.put(cliente.getCpf(), cliente);
+
+			return "Cliente cadastrado com sucesso!";
+		} catch (Exception e) {
+			return e.getMessage();
+		}
 	}
 
 	public ItemEstoque buscarItem(String codigo) throws Exception {

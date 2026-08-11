@@ -6,7 +6,6 @@ import static org.junit.Assert.assertTrue;
 import org.junit.Test;
 
 import model.CategoriaItem;
-import model.Cliente;
 
 public class LojaControllerTest {
 
@@ -142,7 +141,7 @@ public class LojaControllerTest {
 	@Test
 	public void testAdicionarAoCarrinhoComItemInexistente() throws Exception {
 		LojaController controlador = new LojaController();
-		controlador.cadastrarCliente(new Cliente("11111111111", "João"));
+		controlador.cadastrarCliente("11111111111", "João");
 
 		String resultado = controlador.adicionarAoCarrinho("11111111111", "COD_INEXISTENTE", 1);
 
@@ -152,7 +151,7 @@ public class LojaControllerTest {
 	@Test
 	public void testAdicionarAoCarrinhoComSucesso() throws Exception {
 		LojaController controlador = new LojaController();
-		controlador.cadastrarCliente(new Cliente("11111111111", "João"));
+		controlador.cadastrarCliente("11111111111", "João");
 		controlador.adicionarJogoDigital("JD01", "Elden Ring", 250.0, 10, CategoriaItem.JOGO, 45.0, "CHAVE123");
 
 		String resultado = controlador.adicionarAoCarrinho("11111111111", "JD01", 2);
@@ -172,7 +171,7 @@ public class LojaControllerTest {
 	@Test
 	public void testFinalizarCompraSemCupom() throws Exception {
 		LojaController controlador = new LojaController();
-		controlador.cadastrarCliente(new Cliente("11111111111", "João"));
+		controlador.cadastrarCliente("11111111111", "João");
 		controlador.adicionarJogoDigital("JD01", "Elden Ring", 100.0, 10, CategoriaItem.JOGO, 45.0, "CHAVE123");
 		controlador.adicionarAoCarrinho("11111111111", "JD01", 2);
 
@@ -184,7 +183,7 @@ public class LojaControllerTest {
 	@Test
 	public void testFinalizarCompraComCupomFixo() throws Exception {
 		LojaController controlador = new LojaController();
-		controlador.cadastrarCliente(new Cliente("11111111111", "João"));
+		controlador.cadastrarCliente("11111111111", "João");
 		controlador.adicionarJogoDigital("JD01", "Elden Ring", 100.0, 10, CategoriaItem.JOGO, 45.0, "CHAVE123");
 		controlador.adicionarAoCarrinho("11111111111", "JD01", 2);
 
@@ -196,7 +195,7 @@ public class LojaControllerTest {
 	@Test
 	public void testFinalizarCompraComCupomPorcentagem() throws Exception {
 		LojaController controlador = new LojaController();
-		controlador.cadastrarCliente(new Cliente("11111111111", "João"));
+		controlador.cadastrarCliente("11111111111", "João");
 		controlador.adicionarJogoDigital("JD01", "Elden Ring", 100.0, 10, CategoriaItem.JOGO, 45.0, "CHAVE123");
 		controlador.adicionarAoCarrinho("11111111111", "JD01", 2);
 
@@ -208,7 +207,7 @@ public class LojaControllerTest {
 	@Test
 	public void testFinalizarCompraComCupomInvalidoRetornaErro() throws Exception {
 		LojaController controlador = new LojaController();
-		controlador.cadastrarCliente(new Cliente("11111111111", "João"));
+		controlador.cadastrarCliente("11111111111", "João");
 		controlador.adicionarJogoDigital("JD01", "Elden Ring", 100.0, 10, CategoriaItem.JOGO, 45.0, "CHAVE123");
 		controlador.adicionarAoCarrinho("11111111111", "JD01", 2);
 
@@ -233,7 +232,7 @@ public class LojaControllerTest {
 	@Test
 	public void testFinalizarCompraReduzEstoqueELimpaCarrinho() throws Exception {
 		LojaController controlador = new LojaController();
-		controlador.cadastrarCliente(new Cliente("11111111111", "João"));
+		controlador.cadastrarCliente("11111111111", "João");
 		controlador.adicionarJogoDigital("JD01", "Elden Ring", 100.0, 10, CategoriaItem.JOGO, 45.0, "CHAVE123");
 		controlador.adicionarAoCarrinho("11111111111", "JD01", 2);
 
@@ -272,7 +271,7 @@ public class LojaControllerTest {
 	@Test
 	public void testListarClientesComCarrinhoVazio() throws Exception {
 		LojaController controlador = new LojaController();
-		controlador.cadastrarCliente(new Cliente("11111111111", "João"));
+		controlador.cadastrarCliente("11111111111", "João");
 
 		String esperado = "CPF: 11111111111\nNome: João\nCarrinho:\n  (vazio)";
 
@@ -282,7 +281,7 @@ public class LojaControllerTest {
 	@Test
 	public void testListarClientesComItemNoCarrinho() throws Exception {
 		LojaController controlador = new LojaController();
-		controlador.cadastrarCliente(new Cliente("11111111111", "João"));
+		controlador.cadastrarCliente("11111111111", "João");
 		controlador.adicionarJogoDigital("JD01", "Elden Ring", 250.0, 10, CategoriaItem.JOGO, 45.0, "CHAVE123");
 		controlador.adicionarAoCarrinho("11111111111", "JD01", 2);
 

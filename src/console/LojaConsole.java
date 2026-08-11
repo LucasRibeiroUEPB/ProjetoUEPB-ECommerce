@@ -4,7 +4,6 @@ import java.util.Scanner;
 
 import controller.LojaController;
 import model.CategoriaItem;
-import model.Cliente;
 
 public class LojaConsole {
 
@@ -184,12 +183,8 @@ public class LojaConsole {
 		String cpf = lerTexto("CPF:");
 		String nome = lerTexto("Nome:");
 
-		try {
-			controlador.cadastrarCliente(new Cliente(cpf, nome));
-			System.out.println("Cliente cadastrado com sucesso!");
-		} catch (Exception e) {
-			System.out.println(e.getMessage());
-		}
+		String resultado = controlador.cadastrarCliente(cpf, nome);
+		System.out.println(resultado);
 	}
 
 	private void adicionarAoCarrinho() {
