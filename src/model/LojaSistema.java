@@ -149,14 +149,14 @@ public class LojaSistema {
 		}
 
 		String info = "";
-		boolean primeiro = true;
-
+		int tamanho = inventario.size();	
 		for (ItemEstoque item : inventario.values()) {
-			if (!primeiro) {
-				info += "\n";
-			}
 			info += item;
-			primeiro = false;
+			tamanho--;
+			
+			if(tamanho>0) {
+				info+="\n";
+			}
 		}
 		return info;
 
@@ -168,14 +168,13 @@ public class LojaSistema {
 		}
 
 		String info = "";
-		boolean primeiro = true;
-
+		int tamanho = clientes.size();
 		for (Cliente cliente : clientes.values()) {
-			if (!primeiro) {
-				info += "\n";
-			}
 			info += cliente;
-			primeiro = false;
+			tamanho--;
+			if(tamanho>0) {
+				info+="\n";
+			}
 		}
 		return info;
 
