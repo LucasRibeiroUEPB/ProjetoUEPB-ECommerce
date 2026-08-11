@@ -1,6 +1,6 @@
 package model;
 
-import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.Map;
 
 public class LojaSistema {
@@ -8,8 +8,8 @@ public class LojaSistema {
 	private Map<String, Cliente> clientes;
 
 	public LojaSistema() {
-		this.inventario = new HashMap<>();
-		this.clientes = new HashMap<>();
+		this.inventario = new LinkedHashMap<>();
+		this.clientes = new LinkedHashMap<>();
 	}
 
 	public String adicionarJogoDigital(String codigo, String nome, double precoBase, int quantidadeEstoque,
@@ -118,10 +118,18 @@ public class LojaSistema {
 	}
 
 	public void processarVenda(CarrinhoDeCompras carrinho) throws Exception {
-		Map<ItemEstoque, Integer> quantidades = carrinho.getQuantidades();
+		Map<ItemEstoque, Integer> quantidades = carrinho.getItensNoCarrinho();
 
 		for (Map.Entry<ItemEstoque, Integer> entry : quantidades.entrySet()) {
+			ItemEstoque item = entry.getKey();
+			int quantidadeSolicitada = entry.getValue();
 
+			if (quantidadeSolicitada > item.getQuantidadeEstoque()) {
+				throw new Exception("Estoque insuficiente para o item: " + item.getNome());
+			}
+		}
+
+		for (Map.Entry<ItemEstoque, Integer> entry : quantidades.entrySet()) {
 			ItemEstoque item = entry.getKey();
 			int quantidadeSolicitada = entry.getValue();
 

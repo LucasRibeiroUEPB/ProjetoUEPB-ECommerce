@@ -262,10 +262,6 @@ public class LojaControllerTest {
 		assertEquals(esperado, controlador.listarItens());
 	}
 
-	// =========================================================
-	// TESTES DE listarClientes
-	// =========================================================
-
 	@Test
 	public void testListarClientesSemCadastros() {
 		LojaController controlador = new LojaController();

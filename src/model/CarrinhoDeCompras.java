@@ -9,13 +9,11 @@ import exception.Validador;
 
 public class CarrinhoDeCompras {
 
-	private List<ItemEstoque> itens;
-	private Map<ItemEstoque, Integer> quantidades;
+	private Map<ItemEstoque, Integer> itensNoCarrinho;
 	private CalculoDesconto estrategiaDesconto;
 
 	public CarrinhoDeCompras() {
-		this.itens = new ArrayList<>();
-		this.quantidades = new HashMap<>();
+		this.itensNoCarrinho = new HashMap<>();
 		this.estrategiaDesconto = null;
 	}
 
@@ -30,23 +28,21 @@ public class CarrinhoDeCompras {
 
 		Validador.verificarZero(quantidade, "Quantidade deve ser maior que zero");
 
-		if (itens.contains(item)) {
-			quantidades.put(item, quantidades.get(item) + quantidade);
+		if (itensNoCarrinho.containsKey(item)) {
+			itensNoCarrinho.put(item, itensNoCarrinho.get(item) + quantidade);
 		} else {
-			itens.add(item);
-			quantidades.put(item, quantidade);
+			itensNoCarrinho.put(item, quantidade);
 		}
 	}
 
 	public void removerItem(ItemEstoque item) {
-		itens.remove(item);
-		quantidades.remove(item);
+		itensNoCarrinho.remove(item);
 	}
 
 	private double calcularSubtotal() {
 		double subtotal = 0.0;
-		for (ItemEstoque item : itens) {
-			subtotal += item.calcularPrecoFinal() * quantidades.get(item);
+		for (ItemEstoque item : itensNoCarrinho.keySet()) {
+			subtotal += item.calcularPrecoFinal() * itensNoCarrinho.get(item);
 		}
 		return subtotal;
 	}
@@ -57,33 +53,32 @@ public class CarrinhoDeCompras {
 	}
 
 	public void limparCarrinho() {
-		itens.clear();
-		quantidades.clear();
+		itensNoCarrinho.clear();
 	}
 
 	public List<ItemEstoque> getItens() {
-		return itens;
+		return new ArrayList<>(itensNoCarrinho.keySet());
 	}
 
-	public Map<ItemEstoque, Integer> getQuantidades() {
-		return quantidades;
+	public Map<ItemEstoque, Integer> getItensNoCarrinho() {
+		return itensNoCarrinho;
 	}
 
 	@Override
 	public String toString() {
-		if (itens.isEmpty()) {
+		if (itensNoCarrinho.isEmpty()) {
 			return "  (vazio)";
 		}
 		String info = "";
 		boolean primeiro = true;
-		for (ItemEstoque item : itens) {
+
+		for (ItemEstoque item : itensNoCarrinho.keySet()) {
 			if (!primeiro) {
 				info += "\n";
 			}
-			info += "  " + item.getNome() + " x" + quantidades.get(item);
+			info += "  " + item.getNome() + " x" + itensNoCarrinho.get(item);
 			primeiro = false;
 		}
 		return info;
 	}
-
 }
