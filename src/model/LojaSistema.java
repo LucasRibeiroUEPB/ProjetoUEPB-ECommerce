@@ -49,6 +49,19 @@ public class LojaSistema {
 		inventario.put(item.getCodigo(), item);
 	}
 
+	public String adicionarEstoque(String codigo, int quantidade) {
+		try {
+			ItemEstoque item = buscarItem(codigo);
+
+			item.adicionarEstoque(quantidade);
+
+			return "Estoque do item \"" + item.getNome() + "\" atualizado com sucesso. Novo saldo: "
+					+ item.getQuantidadeEstoque();
+		} catch (Exception e) {
+			return e.getMessage();
+		}
+	}
+
 	public String cadastrarCliente(String cpf, String nome) {
 		try {
 			if (clientes.containsKey(cpf)) {

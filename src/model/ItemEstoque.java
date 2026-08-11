@@ -64,6 +64,13 @@ public abstract class ItemEstoque {
 		quantidadeEstoque -= qtd;
 	}
 
+	public void adicionarEstoque(int qtd) throws Exception {
+
+		Validador.verificaMenorOuIgualaZero(qtd, "A quantidade para adicionar ao estoque deve ser maior que zero");
+
+		this.quantidadeEstoque += qtd;
+	}
+
 	@Override
 	public int hashCode() {
 		return Objects.hash(codigo);

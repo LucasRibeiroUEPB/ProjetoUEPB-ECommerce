@@ -43,6 +43,10 @@ public class LojaController {
 		return sistema.listarItens();
 	}
 
+	public String adicionarEstoque(String codigo, int quantidade) {
+		return sistema.adicionarEstoque(codigo, quantidade);
+	}
+
 	public String listarClientes() {
 		return sistema.listarClientes();
 	}

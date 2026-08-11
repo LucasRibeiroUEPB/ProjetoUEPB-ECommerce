@@ -44,6 +44,7 @@ public class LojaConsole {
 		System.out.println("5 - Listar itens em estoque");
 		System.out.println("6 - Listar clientes");
 		System.out.println("7 - Remover item do carrinho");
+		System.out.println("8 - Adicionar estoque a um item");
 		System.out.println("0 - Sair");
 		System.out.println();
 	}
@@ -77,6 +78,11 @@ public class LojaConsole {
 		case 7:
 			removerDoCarrinho();
 			break;
+
+		case 8:
+			adicionarEstoque();
+			break;
+
 		case 0:
 			System.out.println("Programa encerrado.");
 			break;
@@ -226,5 +232,13 @@ public class LojaConsole {
 
 	private void listarClientes() {
 		System.out.println(controlador.listarClientes());
+	}
+
+	private void adicionarEstoque() {
+		String codigo = lerTexto("Codigo do item: ");
+		int quantidade = lerInteiro("Quantidade a adicionar: ");
+
+		String resultado = controlador.adicionarEstoque(codigo, quantidade);
+		System.out.println(resultado);
 	}
 }
