@@ -1,6 +1,7 @@
 package model;
 
 import java.util.LinkedHashMap;
+import java.util.List;
 import java.util.Map;
 
 public class LojaSistema {
@@ -163,17 +164,24 @@ public class LojaSistema {
 	}
 
 	private void processarVenda(CarrinhoDeCompras carrinho) throws Exception {
-		Map<ItemEstoque, Integer> quantidades = carrinho.getItensNoCarrinho();
+		Map<ItemEstoque, Integer> itensNoCarrinho = carrinho.getItensNoCarrinho();
 
-		for (Map.Entry<ItemEstoque, Integer> entry : quantidades.entrySet()) {
+		for (Map.Entry<ItemEstoque, Integer> entry : itensNoCarrinho.entrySet()) {
 			ItemEstoque item = entry.getKey();
 			int quantidadeSolicitada = entry.getValue();
 
 			if (quantidadeSolicitada > item.getQuantidadeEstoque()) {
 				throw new Exception("Estoque insuficiente para o item: " + item.getNome());
 			}
+		}
+
+		for (Map.Entry<ItemEstoque, Integer> entry : itensNoCarrinho.entrySet()) {
+			ItemEstoque item = entry.getKey();
+			int quantidadeSolicitada = entry.getValue();
+
 			item.reduzirEstoque(quantidadeSolicitada);
 		}
+
 		carrinho.limparCarrinho();
 	}
 
@@ -217,7 +225,7 @@ public class LojaSistema {
 		try {
 			Cliente cliente = buscarCliente(cpf);
 
-			java.util.List<String> historico = cliente.getHistoricoDeCompras();
+			List<String> historico = cliente.getHistoricoDeCompras();
 
 			if (historico.isEmpty()) {
 				return "Nenhuma compra registrada para o cliente " + cliente.getNome() + ".";
