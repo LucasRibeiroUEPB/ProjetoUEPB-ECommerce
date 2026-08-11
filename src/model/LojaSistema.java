@@ -138,15 +138,8 @@ public class LojaSistema {
 			if (quantidadeSolicitada > item.getQuantidadeEstoque()) {
 				throw new Exception("Estoque insuficiente para o item: " + item.getNome());
 			}
-		}
-
-		for (Map.Entry<ItemEstoque, Integer> entry : quantidades.entrySet()) {
-			ItemEstoque item = entry.getKey();
-			int quantidadeSolicitada = entry.getValue();
-
 			item.reduzirEstoque(quantidadeSolicitada);
 		}
-
 		carrinho.limparCarrinho();
 	}
 
