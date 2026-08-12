@@ -157,7 +157,7 @@ public class LojaConsole {
 			double precoBase = lerDouble("Preco base:");
 			int quantidadeEstoque = lerInteiro("Quantidade em estoque:");
 			CategoriaItem categoria = lerCategoria();
-			double peso = lerDouble("Peso (kg):");
+			double peso = lerDouble("Peso (g):");
 			String dimensoes = lerTexto("Dimensoes:");
 			String estadoConservacao = lerTexto("Estado de conservacao:");
 
