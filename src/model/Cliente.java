@@ -29,9 +29,6 @@ public class Cliente {
 		historicoDeCompras.add(recibo);
 	}
 
-	public void setHistoricoDeCompras(List<String> historicoDeCompras) {
-		this.historicoDeCompras = historicoDeCompras;
-	}
 
 	public String getCpf() {
 		return cpf;
