@@ -166,16 +166,15 @@ public class LojaSistema {
 	private void processarVenda(CarrinhoDeCompras carrinho) throws Exception {
 		Map<ItemEstoque, Integer> itensNoCarrinho = carrinho.getItensNoCarrinho();
 
-		for (Map.Entry<ItemEstoque, Integer> entry : itensNoCarrinho.entrySet()) {
-			ItemEstoque item = entry.getKey();
-			int quantidadeSolicitada = entry.getValue();
+		for (Map.Entry<ItemEstoque, Integer> itemDupla : itensNoCarrinho.entrySet()) {
+			ItemEstoque item = itemDupla.getKey();
+			int quantidadeSolicitada = itemDupla.getValue();
 
 			if (quantidadeSolicitada > item.getQuantidadeEstoque()) {
 				throw new Exception("Estoque insuficiente para o item: " + item.getNome());
 			}else {
 				item.reduzirEstoque(quantidadeSolicitada);
 			}
-			carrinho.limparCarrinho();
 		}
 
 		carrinho.limparCarrinho();
