@@ -373,4 +373,23 @@ public class LojaControllerTest {
 		String esperado = "CPF: 11111111111\nNome: João\nCarrinho:\n  (vazio)";
 		assertEquals(esperado, controlador.listarClientes());
 	}
+	
+	@Test
+	public void testProcessarVenda() {
+		LojaController controlador = new LojaController();
+		controlador.cadastrarCliente("11111111", "Jose");
+		controlador.cadastrarCliente("22222222", "Maria");
+
+		controlador.adicionarJogoDigital("JD01", "Elden Ring", 250.0, 1, CategoriaItem.JOGO, 45.0, "CHAVE123");
+		controlador.adicionarAoCarrinho("11111111", "JD01", 1);
+		controlador.adicionarAoCarrinho("22222222", "JD01", 1);
+		
+		 String resultado1 = controlador.finalizarCompra("11111111", null);
+		 String resultado2 = controlador.finalizarCompra("22222222", null);
+		 
+		 assertTrue(resultado1.contains("sucesso"));
+		 assertTrue(resultado2.contains("insuficiente"));
+
+
+	}
 }
